@@ -21,18 +21,6 @@ body {
   margin-bottom: 60px;
 }
 
-
-
-
-
-/* Moi nastroiki */
-
-
-/* ========================================
-   INTELLIGENT LANGUAGE ASSISTANT
-   Цветова палитра: Сливово и прасковено
-======================================== */
-
 :root {
     --primary: #513B50;
     --accent: #C48E91;
@@ -42,7 +30,7 @@ body {
     --white: #FFFFFF;
 }
 
-/* ОСНОВЕН ДИЗАЙН */
+/*osnoven dizain*/
 
 body {
     background-color: var(--background);
@@ -63,7 +51,7 @@ p {
     line-height: 1.7;
 }
 
-/* НАВИГАЦИОННО МЕНЮ */
+/*menu*/
 
 .navbar {
     background-color: var(--primary) !important;
@@ -88,7 +76,7 @@ p {
             color: #F2C7C7 !important;
         }
 
-/* КАРТИ */
+/*karti*/
 
 .card {
     background-color: #F2DED6;
@@ -107,7 +95,7 @@ p {
     padding: 25px;
 }
 
-/* БУТОНИ */
+/* butoni */
 
 .btn {
     border-radius: 10px;
@@ -176,7 +164,7 @@ p {
     border-color: #807580;
 }
 
-/* ФОРМУЛЯРИ */
+/* formulqri */
 
 .form-control,
 .form-select {
@@ -198,7 +186,7 @@ p {
     font-weight: 600;
 }
 
-/* ТАБЛИЦИ */
+/* tablica */
 
 .table {
     background-color: white;
@@ -221,7 +209,7 @@ p {
     border-radius: 12px;
 }
 
-/* БАДЖОВЕ */
+/* badj */
 
 .badge.bg-success {
     background-color: #7D697D !important;
@@ -230,12 +218,7 @@ p {
     border-radius: 20px;
 }
 
-/* ФЛАШ КАРТИ */
-
-
-/* =====================================
-   FLASHCARDS - FADE ANIMATION
-===================================== */
+/* flash karti */
 
 .fade-card-container {
     max-width: 560px;
@@ -341,7 +324,7 @@ p {
 }
 
 
-/* СЪОБЩЕНИЯ */
+/* suobshteniq */
 
 .alert-success {
     background-color: #E6F0E9;
@@ -361,7 +344,7 @@ p {
     border-color: #E4CBD9;
 }
 
-/* FOOTER */
+/* footer */
 
 .footer {
     background-color: transparent;
@@ -372,7 +355,7 @@ p {
         color: var(--primary);
     }
 
-/* МОБИЛЕН ДИЗАЙН */
+
 
 @media (max-width: 768px) {
     h1 {

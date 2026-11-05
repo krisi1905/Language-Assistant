@@ -15,21 +15,18 @@ namespace LanguageAssistant.Controllers
             _context = context;
         }
 
-        // Показва всички записани думи
         public async Task<IActionResult> Index()
         {
             var words = await _context.Words.ToListAsync();
             return View(words);
         }
 
-        // Показва формуляра за добавяне
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // Запазва новата дума в базата
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Word word)
@@ -47,7 +44,6 @@ namespace LanguageAssistant.Controllers
 
 
 
-        // Показва формуляра за редактиране
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -61,7 +57,7 @@ namespace LanguageAssistant.Controllers
             return View(word);
         }
 
-        // Запазва редактираната дума
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Word word)
@@ -98,7 +94,7 @@ namespace LanguageAssistant.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // Показва страница за потвърждение
+       
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -112,7 +108,7 @@ namespace LanguageAssistant.Controllers
             return View(word);
         }
 
-        // Изтрива думата след потвърждение
+        
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
