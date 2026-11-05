@@ -20,7 +20,8 @@ namespace LanguageAssistant.Models
 
         public string? DifficultyLevel { get; set; }
 
-        public DateTime DateAdded { get; set; } = DateTime.Now;
+        public DateTime DateAdded { get; set; } = DateTime.UtcNow;
+
     }
 }
 
