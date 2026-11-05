@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Начало";
+}
+
+<div class="text-center py-5">
+
+    <h1 class="display-4 fw-bold">
+        Интелигентен езиков помощник
+    </h1>
+
+    <p class="lead text-muted mt-3">
+        Научавай английски думи по лесен и интерактивен начин с помощта на изкуствен интелект.
+    </p>
+
+    <a asp-controller="AI"
+       asp-action="Index"
+       class="btn btn-primary btn-lg mt-3">
+        Започни с AI помощник
+    </a>
+
+</div>
+
+<div class="row g-4 mt-3">
+
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <h4>AI помощник</h4>
+
+                <p>
+                    Получавай автоматично преводи, синоними, примери и ниво на трудност.
+                </p>
+
+                <a asp-controller="AI"
+                   asp-action="Index"
+                   class="btn btn-outline-primary">
+                    Отвори
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <h4>Моите думи</h4>
+
+                <p>
+                    Запазвай, редактирай и управлявай научените думи.
+                </p>
+
+                <a asp-controller="Words"
+                   asp-action="Index"
+                   class="btn btn-outline-primary">
+                    Отвори
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <h4>Флаш карти</h4>
+
+                <p>
+                    Упражнявай наученото чрез интерактивни карти.
+                </p>
+
+                <a asp-controller="Flashcards"
+                   asp-action="Index"
+                   class="btn btn-outline-primary">
+                    Отвори
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <h4>Английски речник</h4>
+
+                <p>
+                    Търси значения, синоними и примери на думи.
+                </p>
+
+                <a asp-controller="Dictionary"
+                   asp-action="Index"
+                   class="btn btn-outline-primary">
+                    Отвори
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <h4>Дума на деня</h4>
+
+                <p>
+                    Откривай нова дума всеки ден и обогатявай речника си.
+                </p>
+
+                <a asp-controller="WordOfTheDay"
+                   asp-action="Index"
+                   class="btn btn-outline-primary">
+                    Отвори
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>

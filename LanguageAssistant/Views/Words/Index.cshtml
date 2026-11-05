@@ -1,0 +1,67 @@
+﻿@model IEnumerable<LanguageAssistant.Models.Word>
+
+@{
+    ViewData["Title"] = "Моите думи";
+}
+
+<h2>Моите думи</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Дума</th>
+                <th>Превод</th>
+                <th>Синоними</th>
+                <th>Пример</th>
+                <th>Ниво</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var word in Model)
+            {
+                <tr>
+                    <td>@word.Text</td>
+                    <td>@word.Translation</td>
+                    <td>@word.Synonyms</td>
+                    <td>@word.Example</td>
+                    <td>@word.DifficultyLevel</td>
+
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a asp-action="Edit"
+                               asp-route-id="@word.Id"
+                               class="btn btn-warning btn-sm">
+                                Редактирай
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@word.Id"
+                               class="btn btn-danger btn-sm">
+                                Изтрий
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<a asp-controller="Words"
+   asp-action="Create"
+   class="btn btn-success mb-3">
+    Добави нова дума
+</a>

@@ -1,0 +1,163 @@
+﻿@model LanguageAssistant.Models.Dtos.DictionaryEntryDto
+
+@{
+    ViewData["Title"] = "Търсене на дума";
+}
+
+<h2>Английски речник</h2>
+
+    <p class="text-muted">
+        Използвай английския речник, за да проверяваш
+        значенията и употребата на английски думи.
+
+    </p>
+
+<form asp-controller="Dictionary"
+      asp-action="Search"
+      method="post">
+
+    <div class="mb-3">
+        <input type="text"
+               name="word"
+               class="form-control"
+               placeholder="Например: beautiful"
+               required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Потърси
+    </button>
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger mt-3">
+        @ViewBag.Error
+    </div>
+}
+
+@if (Model != null)
+{
+    <div class="card mt-4">
+        <div class="card-body">
+            <h3>@Model.Word</h3>
+
+            <p>Произношение: @Model.Phonetic</p>
+
+            @foreach (var meaning in Model.Meanings.Take(3))
+            {
+                var first = meaning.Definitions.FirstOrDefault();
+
+                var synonyms = meaning.Synonyms
+                    .Concat(first?.Synonyms ?? new List<string>())
+                    .Distinct()
+                    .Take(8)
+                    .ToList();
+
+                <hr />
+
+                <h5>@meaning.PartOfSpeech</h5>
+
+                @if (first != null)
+                {
+                    <p>
+                        <strong>Значение:</strong>
+                        @first.Definition
+                    </p>
+
+                    @if (!string.IsNullOrEmpty(first.Example))
+                    {
+                        <p>
+                            <strong>Пример:</strong>
+                            @first.Example
+                        </p>
+                    }
+                }
+
+                @if (synonyms.Any())
+                {
+                    <p>
+                        <strong>Синоними:</strong>
+                        @string.Join(", ", synonyms)
+                    </p>
+                }
+            }
+
+           
+           
+            @{
+                var allSynonyms = Model.Meanings
+                    .SelectMany(m =>
+                        m.Synonyms.Concat(
+                            m.Definitions.SelectMany(d => d.Synonyms)))
+                    .Where(s => !string.IsNullOrWhiteSpace(s))
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .Take(10)
+                    .ToList();
+
+                var example = Model.Meanings
+                    .SelectMany(m => m.Definitions)
+                    .Select(d => d.Example)
+                    .FirstOrDefault(e => !string.IsNullOrWhiteSpace(e));
+            }
+
+
+
+            <hr />
+
+            <h4>Запази тази дума</h4>
+
+            <form asp-controller="Dictionary"
+                  asp-action="Save"
+                  method="post">
+
+                <input type="hidden"
+                       name="text"
+                       value="@Model.Word" />
+
+                <input type="hidden"
+                       name="synonyms"
+                       value="@string.Join(", ", allSynonyms)" />
+
+                <input type="hidden"
+                       name="example"
+                       value="@example" />
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Превод на български
+                    </label>
+
+                    <input type="text"
+                           name="translation"
+                           class="form-control"
+                           placeholder="Въведи превод"
+                           required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Ниво на трудност
+                    </label>
+
+                    <select name="difficultyLevel"
+                            class="form-select">
+                        <option value="">Избери ниво</option>
+                        <option value="A1">A1</option>
+                        <option value="A2">A2</option>
+                        <option value="B1">B1</option>
+                        <option value="B2">B2</option>
+                        <option value="C1">C1</option>
+                        <option value="C2">C2</option>
+                    </select>
+                </div>
+
+
+                <button type="submit" class="btn btn-success">
+                    Запази в Моите думи
+                </button>
+            </form>
+
+        </div>
+    </div>
+}

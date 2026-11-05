@@ -1,0 +1,142 @@
+﻿@model LanguageAssistant.Models.Word
+
+@{
+    ViewData["Title"] = "AI езиков помощник";
+}
+
+<h2>AI езиков помощник</h2>
+
+
+<p class="text-muted">
+    Използвай Google Gemini,
+    за да изучаваш английския език.
+
+    Въведи дума и ще получиш автоматично превод
+    на български, синоними и примери.
+</p>
+
+
+<form asp-controller="AI"
+      asp-action="Analyze"
+      method="post">
+
+    <div class="mb-3">
+        <label class="form-label">Въведи дума</label>
+
+        <input type="text"
+               name="word"
+               class="form-control"
+               value="@Model?.Text"
+               placeholder="Например: wonderful"
+               required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Анализирай с AI
+    </button>
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger mt-3">
+        @ViewBag.Error
+    </div>
+}
+
+@if (Model != null)
+{
+    <div class="card mt-4">
+        <div class="card-body">
+
+            <h4>Резултат от AI</h4>
+
+            <p class="text-muted">
+                Можеш да редактираш информацията,
+                преди да я запазиш.
+            </p>
+
+            <form asp-controller="AI"
+                  asp-action="Save"
+                  method="post">
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Text"
+                           class="form-label">
+                        Английска дума
+                    </label>
+
+                    <input asp-for="Text"
+                           class="form-control" />
+
+                    <span asp-validation-for="Text"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Translation"
+                           class="form-label">
+                        Превод на български
+                    </label>
+
+                    <input asp-for="Translation"
+                           class="form-control" />
+
+                    <span asp-validation-for="Translation"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Synonyms"
+                           class="form-label">
+                        Синоними
+                    </label>
+
+                    <input asp-for="Synonyms"
+                           class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Example"
+                           class="form-label">
+                        Примерно изречение
+                    </label>
+
+                    <textarea asp-for="Example"
+                              class="form-control"
+                              rows="2"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DifficultyLevel"
+                           class="form-label">
+                        Ниво на трудност
+                    </label>
+
+                    <select asp-for="DifficultyLevel"
+                            class="form-select">
+
+                        <option value="">Избери ниво</option>
+                        <option value="A1">A1</option>
+                        <option value="A2">A2</option>
+                        <option value="B1">B1</option>
+                        <option value="B2">B2</option>
+                        <option value="C1">C1</option>
+                        <option value="C2">C2</option>
+                    </select>
+                </div>
+
+                <button type="submit"
+                        class="btn btn-success">
+                    Запази в Моите думи
+                </button>
+            </form>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

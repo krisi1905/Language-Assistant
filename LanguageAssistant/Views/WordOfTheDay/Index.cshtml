@@ -1,0 +1,53 @@
+﻿@model LanguageAssistant.Models.Word
+
+@{
+    ViewData["Title"] = "Дума на деня";
+}
+
+<h2>Дума на деня</h2>
+
+
+@if (Model == null)
+{
+    <div class="alert alert-info">
+        Все още няма записани думи.
+
+        Добави думи в приложението,
+        за да използваш тази функционалност.
+    </div>
+}
+else
+{
+    <div class="card mt-4 shadow-sm">
+        <div class="card-body">
+
+            <h2 class="text-primary">
+                @Model.Text
+            </h2>
+
+            <p>
+                <strong>Превод:</strong>
+                @Model.Translation
+            </p>
+
+            <p>
+                <strong>Синоними:</strong>
+                @Model.Synonyms
+            </p>
+
+            <p>
+                <strong>Примерно изречение:</strong>
+                @Model.Example
+            </p>
+
+            <p>
+                <strong>Ниво на трудност:</strong>
+                <span class="badge bg-success">
+                    @Model.DifficultyLevel
+                </span>
+            </p>
+
+        </div>
+    </div>
+}
+

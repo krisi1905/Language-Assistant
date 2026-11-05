@@ -1,0 +1,72 @@
+﻿@model LanguageAssistant.Models.Word
+
+@{
+    ViewData["Title"] = "Добавяне на дума";
+}
+
+<h2>Добавяне на нова дума</h2>
+
+<form asp-controller="Words" asp-action="Create" method="post">
+
+    <div asp-validation-summary="ModelOnly"
+         class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Text" class="form-label">
+            Английска дума
+        </label>
+        <input asp-for="Text" class="form-control" />
+        <span asp-validation-for="Text" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Translation" class="form-label">
+            Превод
+        </label>
+        <input asp-for="Translation" class="form-control" />
+        <span asp-validation-for="Translation" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Synonyms" class="form-label">
+            Синоними
+        </label>
+        <input asp-for="Synonyms" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Example" class="form-label">
+            Примерно изречение
+        </label>
+        <textarea asp-for="Example" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DifficultyLevel" class="form-label">
+            Ниво на трудност
+        </label>
+        <select asp-for="DifficultyLevel" class="form-select">
+            <option value="">Избери ниво</option>
+            <option>A1</option>
+            <option>A2</option>
+            <option>B1</option>
+            <option>B2</option>
+            <option>C1</option>
+            <option>C2</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Запази думата
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Назад
+    </a>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

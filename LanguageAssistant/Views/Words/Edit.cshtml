@@ -1,0 +1,86 @@
+﻿@model LanguageAssistant.Models.Word
+
+@{
+    ViewData["Title"] = "Редактиране на дума";
+}
+
+<h2>Редактиране на дума</h2>
+
+<form asp-controller="Words"
+      asp-action="Edit"
+      asp-route-id="@Model.Id"
+      method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div asp-validation-summary="ModelOnly"
+         class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Text" class="form-label">
+            Английска дума
+        </label>
+
+        <input asp-for="Text" class="form-control" />
+        <span asp-validation-for="Text"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Translation" class="form-label">
+            Превод
+        </label>
+
+        <input asp-for="Translation" class="form-control" />
+        <span asp-validation-for="Translation"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Synonyms" class="form-label">
+            Синоними
+        </label>
+
+        <input asp-for="Synonyms" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Example" class="form-label">
+            Примерно изречение
+        </label>
+
+        <textarea asp-for="Example"
+                  class="form-control"
+                  rows="3"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DifficultyLevel"
+               class="form-label">
+            Ниво на трудност
+        </label>
+
+        <select asp-for="DifficultyLevel"
+                class="form-select">
+            <option value="">Избери ниво</option>
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="B1">B1</option>
+            <option value="B2">B2</option>
+            <option value="C1">C1</option>
+            <option value="C2">C2</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Запази промените
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Отказ
+    </a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
