@@ -86,7 +86,7 @@ namespace LanguageAssistant.Controllers
                 Synonyms = synonyms,
                 Example = example,
                 DifficultyLevel = difficultyLevel,
-                DateAdded = DateTime.Now
+                DateAdded = DateTime.UtcNow
             };
 
             _context.Words.Add(word);
