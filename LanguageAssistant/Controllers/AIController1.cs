@@ -75,7 +75,9 @@ namespace LanguageAssistant.Controllers
             }
 
             word.Id = 0;
-            word.DateAdded = DateTime.Now;
+
+            word.DateAdded = DateTime.UtcNow;
+
 
             _context.Words.Add(word);
             await _context.SaveChangesAsync();
