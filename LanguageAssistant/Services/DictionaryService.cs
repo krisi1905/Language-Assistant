@@ -25,20 +25,44 @@ namespace LanguageAssistant.Services
 
             try
             {
-                var response = await _httpClient.GetAsync(url);
+
+                using var request = new HttpRequestMessage(
+                    HttpMethod.Get, url);
+
+                request.Headers.UserAgent.ParseAdd(
+                    "LanguageAssistant/1.0");
+
+                request.Headers.Accept.ParseAdd(
+                    "application/json");
+
+                using var response = await _httpClient.SendAsync(request);
+
 
                 _logger.LogInformation(
                     "Dictionary API status: {StatusCode}",
                     (int)response.StatusCode);
 
+
                 if (!response.IsSuccessStatusCode)
                 {
+                    var errorBody =
+                        await response.Content.ReadAsStringAsync();
+
+                    var shortError = errorBody.Length > 200
+                        ? errorBody.Substring(0, 200)
+                        : errorBody;
+
                     _logger.LogWarning(
-                        "Dictionary API returned unsuccessful status: {StatusCode}",
-                        (int)response.StatusCode);
+                        "Dictionary API error {StatusCode}. " +
+                        "Content-Type: {ContentType}. " +
+                        "Response: {Response}",
+                        (int)response.StatusCode,
+                        response.Content.Headers.ContentType?.MediaType,
+                        shortError);
 
                     return null;
                 }
+
 
                 var json = await response.Content.ReadAsStringAsync();
 
